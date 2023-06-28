@@ -9,6 +9,9 @@ const Card = ({ name, username, id }) => {
 
   return (
     <div className="card">
+      <span>{name}</span>
+      <span>{username}</span>
+      <span>{id}</span>
         {/* En cada card deberan mostrar en name - username y el id */}
 
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
