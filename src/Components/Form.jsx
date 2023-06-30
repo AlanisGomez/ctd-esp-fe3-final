@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useState } from 'react';
 
-// En esta pagina deberán implementar un [Form](/src/Components/Form.jsx) (con sus validaciones pertinentes) que capture la información del usuario que desea contactar con la empresa. Los campos serán los siguientes:
-
-// - Nombre completo (con longitud mayor a 5)
-// - Email (con formato correcto de email)
-// - En caso de haber un error mostrar el siguiente mensaje de error: **Por favor verifique su información nuevamente**
-// - Una vez "enviado"( no se envía a ningún servidor pero podemos mostrar por consola los datos submiteados) el formulario deberán mostrar un mensaje de éxito que contenga el siguiente formato: **Gracias _[nombre del usuario]_, te contactaremos cuando antes vía mail**
 const Form = () => {
-  //Aqui deberan implementar el form completo con sus validaciones
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [enviado, setEnviado] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (name.length <= 5 || !email.includes('@')) {
+      setError('Por favor verifique su información nuevamente');
+    } else {
+      console.log('Datos enviados:', name, email);
+      setError('');
+      setEnviado(true);
+    }
+  };
 
   return (
     <div>
-      <form>
-        
+      <form onSubmit={handleSubmit}>
+        <label>
+          Nombre completo:
+          <input type="text" placeholder="Ingresá tu nombre" onBlur={(e) => setName(e.target.value)}/>
+        </label>
+        <br />
+        <label>
+          Email:
+          <br/>
+          <input type="email" placeholder="Ingresá tu email" onBlur={(e) => setEmail(e.target.value)}/>
+        </label>
+        <br />
+        <button type="submit">Enviar</button>
       </form>
+      {error && <p>{error}</p>}
+      {!error && enviado && <p>Gracias {name}, te contactaremos lo antes posible vía mail</p>}
     </div>
   );
 };
