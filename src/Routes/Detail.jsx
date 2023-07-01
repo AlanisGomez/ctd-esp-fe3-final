@@ -26,16 +26,19 @@ const Detail = () => {
   }, []);
 
   return (
-    <div className={theme}>
-      <h1>Detail Dentist id </h1>
-      <p>{params.id}</p>
-      <p>{userData.name}</p>
-      <p>{userData.email}</p>
-      <p>{userData.phone}</p>
-      <p>{userData.website}</p>
+    <main className={theme}>
+      <div className="form-container detail">
+        <h1>Detail Dentist</h1>
+        <p>{params.id}</p>
+        <p>{userData.name}</p>
+        <p>{userData.email}</p>
+        <p>{userData.phone}</p>
+        <p>{userData.website}</p>
+      </div>
+     
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
-    </div>
+    </main>
   )
 }
 

@@ -7,11 +7,9 @@ import { useGlobalState } from '../Components/utils/global.context'
 const Contact = () => {
   const {theme} = useGlobalState()
   return (
-    <div className={theme}>
-      <h2>Want to know more?</h2>
-      <p>Send us your questions and we will contact you</p>
+    <main className={theme}>
       <Form/>
-    </div>
+    </main>
   )
 }
 

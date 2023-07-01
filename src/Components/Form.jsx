@@ -19,20 +19,24 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nombre completo:
-          <input type="text" placeholder="Ingresá tu nombre" onBlur={(e) => setName(e.target.value)}/>
-        </label>
-        <br />
-        <label>
-          Email:
-          <br/>
-          <input type="email" placeholder="Ingresá tu email" onBlur={(e) => setEmail(e.target.value)}/>
-        </label>
-        <br />
-        <button type="submit">Enviar</button>
+    <div className="form-container">
+      
+      <div className="logo-container">
+        <h2>Want to know more?</h2>
+        <p>Send us your questions and we will contact you</p>
+      </div>
+           
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Nombre completo:</label>
+          <input type="text"  name="name" placeholder="Ingresá tu nombre" required onBlur={(e) => setName(e.target.value)}/>
+        </div>
+        <div className="form-group">
+          <label>Email:</label>
+          <input type="email"  name="emal" placeholder="Ingresá tu email" required onBlur={(e) => setEmail(e.target.value)}/>
+        </div>
+
+        <button className="form-submit-btn" type="submit">Enviar</button>
       </form>
       {error && <p>{error}</p>}
       {!error && enviado && <p>Gracias {name}, te contactaremos lo antes posible vía mail</p>}

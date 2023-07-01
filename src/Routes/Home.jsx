@@ -24,7 +24,6 @@ const Home = () => {
 
   return (
     <main className={theme}>
-      <h1>Home</h1>
       <div className='card-grid'>
         {data.map((dentist) => (
           <Link key={dentist.id} to={`/dentist/${dentist.id}`} >
