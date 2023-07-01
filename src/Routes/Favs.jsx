@@ -1,5 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import Card from "../Components/Card";
+import { Link } from "react-router-dom";
 import { useGlobalState } from "../Components/utils/global.context";
 
 const initialState = [];
@@ -18,6 +19,12 @@ function reducer(state, action) {
 const Favs = () => {
   const { theme } = useGlobalState();
   const [favs, dispatch] = useReducer(reducer, initialState);
+  const [storedFavs, setStoredFavs] = useState([]);
+
+  useEffect(() => {
+    const storedFavs = JSON.parse(localStorage.getItem("favs")) || [];
+    setStoredFavs(storedFavs);
+  }, []);
 
   const handleAddFav = (favCard) => {
     // Verificar si la Card ya existe en favoritos
@@ -28,34 +35,35 @@ const Favs = () => {
     }
 
     dispatch({ type: "ADD_FAV", payload: favCard });
-    localStorage.setItem("favs", JSON.stringify([...favs, favCard]));
+    const updatedFavs = [...favs, favCard];
+    localStorage.setItem("favs", JSON.stringify(updatedFavs));
+    setStoredFavs(updatedFavs);
     window.alert("Agregado a favoritos");
   };
 
   const handleRemoveAllFavs = () => {
     dispatch({ type: "REMOVE_ALL_FAVS" });
     localStorage.removeItem("favs");
+    setStoredFavs([]);
   };
-
-  const storedFavs = JSON.parse(localStorage.getItem("favs")) || [];
 
   return (
     <main className={theme}>
-      <h1>Dentists Favs</h1>
       {storedFavs.length > 0 && (
-        <button onClick={handleRemoveAllFavs}>Eliminar todos</button>
+        <button className="deleteButton" onClick={handleRemoveAllFavs}>Eliminar todos</button>
       )}
       <div className="card-grid">
         {storedFavs.map((fav) => (
-          <Card
-            key={fav.id}
-            name={fav.name}
-            username={fav.username}
-            id={fav.id}
-            handleAddFav={handleAddFav}
-            isFav={favs.some((f) => f.id === fav.id)}
-            showAddFavButton={false} // Nueva prop para ocultar el botón
-          />
+          <Link key={fav.id} to={`/dentist/${fav.id}`}>
+            <Card
+              name={fav.name}
+              username={fav.username}
+              id={fav.id}
+              handleAddFav={handleAddFav}
+              isFav={favs.some((f) => f.id === fav.id)}
+              showAddFavButton={false} // Nueva prop para ocultar el botón
+            />
+          </Link>
         ))}
       </div>
     </main>

@@ -2,7 +2,8 @@ import React from "react";
 
 
 const Card = ({ name, username, id, handleAddFav, isFav, showAddFavButton = true }) => {
-  const addFav = () => {
+  const addFav = (event) => {
+    event.preventDefault();
     const favCard = { name, username, id };
     const existingFavs = localStorage.getItem("favs");
     const favs = existingFavs ? JSON.parse(existingFavs) : [];

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalState } from './utils/global.context';
-import './Navbar.jsx';
+
 
 const Navbar = () => {
   const { theme, handleChangeTheme } = useGlobalState();
@@ -20,14 +20,14 @@ const Navbar = () => {
   return (
     <nav className={theme}>
       <Link to="/Home">
-        <button>
+        <button className='buttonSpan' >
           <span>&nbsp;Home&nbsp;</span>
           <span className="hover-text" aria-hidden="true">&nbsp;Home&nbsp;</span>
         </button>
       </Link>
 
       <Link to="/Contact">
-        <button>
+        <button className='buttonSpan' >
           <span >&nbsp;Contact&nbsp;</span>
           <span className="hover-text" aria-hidden="true">&nbsp;Contact&nbsp;</span>
         </button>
@@ -35,13 +35,13 @@ const Navbar = () => {
 
 
       <Link to="/Favs">
-        <button>
+        <button className='buttonSpan'>
           <span>&nbsp;Favs&nbsp;</span>
           <span className="hover-text" aria-hidden="true">&nbsp;Favs&nbsp;</span>
         </button>
       </Link>
 
-    <label>
+    <label className='BB-8'>
       <input type="checkbox" className={"slider"}onClick={handleThemeChange}/>
       <div className={"switch"}>
           <div className={"suns"}></div>
